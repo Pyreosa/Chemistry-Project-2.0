@@ -37,7 +37,11 @@
   </PropertyGroup>
   <ItemGroup>
      <Compile Include="Assets\Scripts\OnDrop.cs" />
-     <Compile Include="Assets\Scripts\DragDrop.cs" />
+     <Compile Include="Assets\SceneManagerScripts\PersistentCanvasManager.cs" />
+     <Compile Include="Assets\Scripts\Draggable.cs" />
+     <Compile Include="Assets\SceneManagerScripts\SceneManagerScript.cs" />
+     <Compile Include="Assets\Scripts\Utils.cs" />
+     <Compile Include="Assets\Scripts\HandDropZone.cs" />
     <Reference Include="UnityEngine">
         <HintPath>C:/Program Files/Unity/Hub/Editor/2020.1.12f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
     </Reference>

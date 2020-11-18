@@ -10,6 +10,7 @@ TagManager:
   - Sodium Chloride
   - Sodium Hyrdrogen
   - HydroChloride Acid
+  - MainCanvas
   layers:
   - Default
   - TransparentFX

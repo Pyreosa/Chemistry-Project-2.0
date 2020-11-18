@@ -1,14 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-public class OnDrop : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPointerExitHandler
+public class HandDropZone : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPointerExitHandler
 {
+     private CanvasGroup canvasGroup;
 
-    public GameObject hydroChloride;
-    private CanvasGroup canvasGroup;
-    
+   
+
     void Awake()
     {
         canvasGroup = GetComponent<CanvasGroup>();
@@ -37,12 +38,11 @@ public class OnDrop : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPointe
         {
             draggable.originalParent = this.transform;
         }
-
     }
 
-     public void OnPointerExit(PointerEventData eventData)
+    public void OnPointerExit(PointerEventData eventData)
     {
-
+        
         if (eventData.pointerDrag == null) return;
 
           Draggable draggable = eventData.pointerDrag.GetComponent<Draggable>();
@@ -52,21 +52,4 @@ public class OnDrop : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPointe
             draggable.whereMyCardWasParent = draggable.originalParent;
         }
     }
-
-    //       if (eventData.pointerDrag != null) 
-    //       {
-    //           combine(eventData);
-    //           Destroy(eventData.pointerEnter);
-    //           Destroy(eventData.pointerDrag);
-    //       }
-
-    //  }
-
-    //  void combine(PointerEventData eventData)
-    //  {
-    //      GameObject molecule = Instantiate(hydroChloride, new Vector3(10, 10), Quaternion.identity);
-    //      molecule.transform.position = eventData.pointerEnter.transform.position;
-    //      molecule.transform.SetParent(Utils.textureRender.transform);
-    //  }
-    
 }
