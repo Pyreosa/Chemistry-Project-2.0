@@ -4,73 +4,77 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class Draggable : MonoBehaviour, IPointerDownHandler, IDragHandler, IBeginDragHandler, IEndDragHandler
+public class Draggable : MonoBehaviour, IPointerDownHandler,IBeginDragHandler, IDragHandler, IEndDragHandler
 {
+        Canvas canvas = Utils.canvas;
 
-    //Canvas canvas = Utils.canvas;
+        public Transform originalParent = null;
+        public Transform placeHolderParent = null;
 
-    public Transform originalParent = null;
-    public Transform whereMyCardWasParent = null;
+        GameObject placeHolder = null;
 
-    GameObject whereMyCardWas = null;
-
-    private RectTransform rectTransform;
-
-    private CanvasGroup canvasGroup;
+        private RectTransform rectTransform;
+        private CanvasGroup canvasGroup;
 
     void Awake()
     {
         rectTransform = GetComponent<RectTransform>();
         canvasGroup = GetComponent<CanvasGroup>();
     }
+
+    public void OnPointerDown(PointerEventData eventData)
+    {
+
+    }
+
     public void OnBeginDrag(PointerEventData eventData)
     {
 
-        canvasGroup.alpha = .6f; 
-        canvasGroup.blocksRaycasts = false;
-
         // Making a placeHolder
-        whereMyCardWas = new GameObject();
-        whereMyCardWas.transform.SetParent( this.transform.parent ); 
+        placeHolder = new GameObject();
+        placeHolder.transform.SetParent( this.transform.parent ); 
 
-        LayoutElement layoutElement = whereMyCardWas.AddComponent<LayoutElement>();
+        LayoutElement layoutElement = placeHolder.AddComponent<LayoutElement>();
         layoutElement.preferredWidth = this.GetComponent<LayoutElement>().preferredWidth;
         layoutElement.preferredHeight = this.GetComponent<LayoutElement>().preferredHeight;
         layoutElement.flexibleWidth = 0;
         layoutElement.flexibleHeight = 0;
 
-        whereMyCardWas.transform.SetSiblingIndex( this.transform.GetSiblingIndex() );
+        placeHolder.transform.SetSiblingIndex( this.transform.GetSiblingIndex() );
         
         // Making the Grid Rearrage itself
         originalParent = this.transform.parent;
-        whereMyCardWasParent = originalParent;
+        placeHolderParent = originalParent;
         this.transform.SetParent( this.transform.parent.parent );
+
+        canvasGroup.alpha = .6f; 
+        canvasGroup.blocksRaycasts = false;
     }
 
     public void OnDrag(PointerEventData eventData)
     {
         rectTransform.anchoredPosition += eventData.delta / Utils.canvas.scaleFactor;
 
-        if (whereMyCardWas.transform.parent != whereMyCardWasParent)
-             whereMyCardWas.transform.SetParent( whereMyCardWasParent );
+        if (placeHolder.transform.parent != placeHolderParent)
+             placeHolder.transform.SetParent( placeHolderParent );
 
         // Making the placeHolder move its position with me
-        int newSiblingIndex = whereMyCardWasParent.childCount;
+        int newSiblingIndex = placeHolderParent.childCount;
         
-        for (int i = 0 ; i < whereMyCardWasParent.childCount ; i++)
+        for (int i = 0 ; i < placeHolderParent.childCount ; i++)
         {
-            if (this.transform.position.x < whereMyCardWasParent.GetChild(i).position.x)
+            if (this.transform.position.x < placeHolderParent.GetChild(i).position.x)
             {
                 newSiblingIndex = i;
-
-                if (whereMyCardWas.transform.GetSiblingIndex() < newSiblingIndex)  newSiblingIndex --;
+                if (placeHolder.transform.GetSiblingIndex() < newSiblingIndex)  
+                     newSiblingIndex --;
 
                 break;
             }
 
         }
 
-        whereMyCardWas.transform.SetSiblingIndex (newSiblingIndex);
+        placeHolder.transform.SetSiblingIndex (newSiblingIndex);
     }
 
     public void OnEndDrag(PointerEventData eventData)
@@ -79,15 +83,10 @@ public class Draggable : MonoBehaviour, IPointerDownHandler, IDragHandler, IBegi
         canvasGroup.blocksRaycasts = true;
 
         //Making a placeHolder
-        Destroy(whereMyCardWas);
+        Destroy(placeHolder);
 
         // Making the Grid Rearrange itself
         this.transform.SetParent( originalParent );
-        this.transform.SetSiblingIndex( whereMyCardWas.transform.GetSiblingIndex() );
-    }
-
-    public void OnPointerDown(PointerEventData eventData)
-    {
-        
+        this.transform.SetSiblingIndex( placeHolder.transform.GetSiblingIndex() );
     }
 }

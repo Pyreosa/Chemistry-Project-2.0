@@ -4,11 +4,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-public class HandDropZone : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPointerExitHandler
+public class HandDropZone : MonoBehaviour, IPointerEnterHandler, IDropHandler, IPointerExitHandler
 {
-     private CanvasGroup canvasGroup;
-
-   
+         private CanvasGroup canvasGroup;
 
     void Awake()
     {
@@ -17,23 +15,21 @@ public class HandDropZone : MonoBehaviour, IDropHandler, IPointerEnterHandler, I
 
      public void OnPointerEnter(PointerEventData eventData)
     {
-
-        if (eventData.pointerDrag == null) return;
+        if (eventData.pointerDrag == null) 
+             return;
 
           Draggable draggable = eventData.pointerDrag.GetComponent<Draggable>();
-
         if (draggable != null)
         {
-            draggable.whereMyCardWasParent = this.transform;
+            draggable.placeHolderParent = this.transform;
         }
     }
 
     void IDropHandler.OnDrop(PointerEventData eventData)
     {
-        Debug.Log(eventData.pointerDrag.name + "was dropped on" + gameObject.name);
+        Debug.Log(eventData.pointerDrag.name + " was dropped on " + gameObject.name);
 
         Draggable draggable = eventData.pointerDrag.GetComponent<Draggable>();
-
         if (draggable != null)
         {
             draggable.originalParent = this.transform;
@@ -43,13 +39,13 @@ public class HandDropZone : MonoBehaviour, IDropHandler, IPointerEnterHandler, I
     public void OnPointerExit(PointerEventData eventData)
     {
         
-        if (eventData.pointerDrag == null) return;
+        if (eventData.pointerDrag == null) 
+             return;
 
           Draggable draggable = eventData.pointerDrag.GetComponent<Draggable>();
-
-        if (draggable != null && draggable.whereMyCardWasParent == this.transform)
+        if (draggable != null && draggable.placeHolderParent == this.transform)
         {
-            draggable.whereMyCardWasParent = draggable.originalParent;
+            draggable.placeHolderParent = draggable.originalParent;
         }
     }
 }

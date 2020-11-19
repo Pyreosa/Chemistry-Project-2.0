@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class Utils : MonoBehaviour
 {
-    public static GameObject textureRender;
-    public static Canvas canvas;
-    GameObject tempObject;
+        public static GameObject textureRender;
+        public static Canvas canvas;
+        GameObject tempObject;
+
     void Start()
     {
         tempObject = GameObject.Find("Canvas");

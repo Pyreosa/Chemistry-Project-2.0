@@ -6,8 +6,8 @@ using UnityEngine.EventSystems;
 public class OnDrop : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPointerExitHandler
 {
 
-    public GameObject hydroChloride;
-    private CanvasGroup canvasGroup;
+        public GameObject hydroChloride;
+        private CanvasGroup canvasGroup;
     
     void Awake()
     {
@@ -16,21 +16,19 @@ public class OnDrop : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPointe
 
      public void OnPointerEnter(PointerEventData eventData)
     {
-
-        if (eventData.pointerDrag == null) return;
+        if (eventData.pointerDrag == null) 
+             return;
 
           Draggable draggable = eventData.pointerDrag.GetComponent<Draggable>();
-
         if (draggable != null)
         {
-            draggable.whereMyCardWasParent = this.transform;
+            draggable.placeHolderParent = this.transform;
         }
     }
 
     void IDropHandler.OnDrop(PointerEventData eventData)
     {
-        Debug.Log(eventData.pointerDrag.name + "was dropped on" + gameObject.name);
-
+        Debug.Log(eventData.pointerDrag.name + " was dropped on " + gameObject.name);
         Draggable draggable = eventData.pointerDrag.GetComponent<Draggable>();
 
         if (draggable != null)
@@ -42,31 +40,30 @@ public class OnDrop : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPointe
 
      public void OnPointerExit(PointerEventData eventData)
     {
-
-        if (eventData.pointerDrag == null) return;
+        if (eventData.pointerDrag == null) 
+             return;
 
           Draggable draggable = eventData.pointerDrag.GetComponent<Draggable>();
-
-        if (draggable != null && draggable.whereMyCardWasParent == this.transform)
+        if (draggable != null && draggable.placeHolderParent == this.transform)
         {
-            draggable.whereMyCardWasParent = draggable.originalParent;
+            draggable.placeHolderParent = draggable.originalParent;
         }
+    
+
+        //   if (eventData.pointerDrag != null) 
+        //   {
+        //       combine(eventData);
+        //       Destroy(eventData.pointerEnter);
+        //       Destroy(eventData.pointerDrag);
+        //   }
+
     }
 
-    //       if (eventData.pointerDrag != null) 
-    //       {
-    //           combine(eventData);
-    //           Destroy(eventData.pointerEnter);
-    //           Destroy(eventData.pointerDrag);
-    //       }
-
-    //  }
-
-    //  void combine(PointerEventData eventData)
-    //  {
-    //      GameObject molecule = Instantiate(hydroChloride, new Vector3(10, 10), Quaternion.identity);
-    //      molecule.transform.position = eventData.pointerEnter.transform.position;
-    //      molecule.transform.SetParent(Utils.textureRender.transform);
-    //  }
+    //   void combine(PointerEventData eventData)
+    //   {
+    //       GameObject molecule = Instantiate(hydroChloride, new Vector3(10, 10), Quaternion.identity);
+    //       molecule.transform.position = eventData.pointerEnter.transform.position;
+    //       molecule.transform.SetParent(Utils.textureRender.transform);
+    //   }
     
 }
