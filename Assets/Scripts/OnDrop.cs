@@ -20,7 +20,7 @@ public class OnDrop : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPointe
         {
             GameObject molecule = Instantiate(hydroChloride, new Vector3(10, 10), Quaternion.identity);
             molecule.transform.position = eventData.pointerEnter.transform.position;
-            molecule.transform.SetParent(Utils.textureRender.transform);
+            molecule.transform.SetParent(Utils.tabletop.transform);
         }
 
      public void OnPointerEnter(PointerEventData eventData)
@@ -40,20 +40,18 @@ public class OnDrop : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPointe
         Debug.Log(eventData.pointerDrag.name + " was dropped on " + gameObject.name);
 
         Draggable draggable = eventData.pointerDrag.GetComponent<Draggable>();
-        if (draggable != null)
+        if (draggable != null && eventData.pointerEnter.tag != "TableTop")
         {
             draggable.originalParent = this.transform;
-        }
-
-        if (eventData.pointerDrag != null) 
-        {
-             for (int i = 0; i < this.transform.childCount; i++)
-
+            Destroy(eventData.pointerDrag);
+            Destroy(eventData.pointerEnter);
+            Destroy(draggable.placeHolder);
+            combine(eventData);
+            Debug.Log(eventData.pointerDrag.tag);
+        } else {
+            if(eventData.pointerEnter.tag == "TableTop")
             {
-                 toBeDestroyed = this.transform.GetComponentsInChildren<RectTransform>().ToString();
-                 Destroy(eventData.pointerDrag);
-                 Destroy(eventData.pointerEnter);
-                 break;
+                draggable.originalParent = this.transform;
             }
         }
 
@@ -71,7 +69,6 @@ public class OnDrop : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPointe
         {
             draggable.placeHolderParent = draggable.originalParent;
         }
-
-    }   
+    }  
 
 }

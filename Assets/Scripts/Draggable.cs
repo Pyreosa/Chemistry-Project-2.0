@@ -12,7 +12,7 @@ public class Draggable : MonoBehaviour, IPointerDownHandler,IBeginDragHandler, I
         public Transform originalParent = null;
         public Transform placeHolderParent = null;
 
-        GameObject placeHolder = null;
+        public GameObject placeHolder = null;
 
         private RectTransform rectTransform;
         private CanvasGroup canvasGroup;

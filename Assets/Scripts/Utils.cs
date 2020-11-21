@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Utils : MonoBehaviour
 {
-        public static GameObject textureRender;
+        public static GameObject tabletop;
         public static Canvas canvas;
         GameObject tempObject;
 
@@ -12,6 +12,6 @@ public class Utils : MonoBehaviour
     {
         tempObject = GameObject.Find("Canvas");
         canvas = tempObject.GetComponent<Canvas>();
-        textureRender = GameObject.Find("Textures");
+        tabletop= GameObject.Find("TableTop");
     }
 }
