@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: -3857128527559023879}
   m_Layer: 0
   m_Name: Sodium Hydrogen
-  m_TagString: Sodium Hyrdrogen
+  m_TagString: Sodium Hydrogen
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -91,6 +91,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   originalParent: {fileID: 0}
+  placeHolderParent: {fileID: 0}
+  placeHolder: {fileID: 0}
 --- !u!225 &6623280888723137832
 CanvasGroup:
   m_ObjectHideFlags: 0

@@ -8,9 +8,10 @@ TagManager:
   - Sodium
   - Hydrogen
   - Sodium Chloride
-  - Sodium Hyrdrogen
   - HydroChloride Acid
   - MainCanvas
+  - TableTop
+  - Sodium Hydrogen
   layers:
   - Default
   - TransparentFX

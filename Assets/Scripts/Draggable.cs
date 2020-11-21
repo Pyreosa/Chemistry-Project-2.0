@@ -30,7 +30,6 @@ public class Draggable : MonoBehaviour, IPointerDownHandler,IBeginDragHandler, I
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-
         // Making a placeHolder
         placeHolder = new GameObject();
         placeHolder.transform.SetParent( this.transform.parent ); 
@@ -59,7 +58,7 @@ public class Draggable : MonoBehaviour, IPointerDownHandler,IBeginDragHandler, I
         if (placeHolder.transform.parent != placeHolderParent)
              placeHolder.transform.SetParent( placeHolderParent );
 
-        // Making the placeHolder move its position with me
+        // Making the placeHolder move its position with the dragged element
         int newSiblingIndex = placeHolderParent.childCount;
         
         for (int i = 0 ; i < placeHolderParent.childCount ; i++)
@@ -68,14 +67,13 @@ public class Draggable : MonoBehaviour, IPointerDownHandler,IBeginDragHandler, I
             {
                 newSiblingIndex = i;
                 if (placeHolder.transform.GetSiblingIndex() < newSiblingIndex)  
-                     newSiblingIndex --;
-
+                    newSiblingIndex --;
+                    
                 break;
             }
-
         }
 
-        placeHolder.transform.SetSiblingIndex (newSiblingIndex);
+        placeHolder.transform.SetSiblingIndex( newSiblingIndex );
     }
 
     public void OnEndDrag(PointerEventData eventData)
@@ -83,8 +81,7 @@ public class Draggable : MonoBehaviour, IPointerDownHandler,IBeginDragHandler, I
         canvasGroup.alpha = 1; 
         canvasGroup.blocksRaycasts = true;
 
-        //Making a placeHolder
-        Destroy(placeHolder);
+        Destroy( placeHolder );
 
         // Making the Grid Rearrange itself
         this.transform.SetParent( originalParent );

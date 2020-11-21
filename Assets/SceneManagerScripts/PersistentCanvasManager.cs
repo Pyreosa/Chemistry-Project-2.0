@@ -6,9 +6,7 @@ using System.Linq;
 public class PersistentCanvasManager : MonoBehaviour
 {
     public static PersistentCanvasManager Instance { get; private set; }
-
     public int Value;
-    
 
     private void Awake()
     {
@@ -16,10 +14,7 @@ public class PersistentCanvasManager : MonoBehaviour
         {
             Instance = this;
             DontDestroyOnLoad(gameObject);
-            Debug.Log(PersistentCanvasManager.Instance.Value);
-        }else{
+        } else
             Destroy(gameObject);
-            Debug.Log(PersistentCanvasManager.Instance.Value);
-        }
     }
 }

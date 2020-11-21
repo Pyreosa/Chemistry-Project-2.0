@@ -20,9 +20,7 @@ public class HandDropZone : MonoBehaviour, IPointerEnterHandler, IDropHandler, I
 
           Draggable draggable = eventData.pointerDrag.GetComponent<Draggable>();
         if (draggable != null)
-        {
             draggable.placeHolderParent = this.transform;
-        }
     }
 
     void IDropHandler.OnDrop(PointerEventData eventData)
@@ -33,9 +31,7 @@ public class HandDropZone : MonoBehaviour, IPointerEnterHandler, IDropHandler, I
 
         Draggable draggable = eventData.pointerDrag.GetComponent<Draggable>();
         if (draggable != null)
-        {
             draggable.originalParent = this.transform;
-        }
     }
 
     public void OnPointerExit(PointerEventData eventData)
@@ -46,8 +42,6 @@ public class HandDropZone : MonoBehaviour, IPointerEnterHandler, IDropHandler, I
 
           Draggable draggable = eventData.pointerDrag.GetComponent<Draggable>();
         if (draggable != null && draggable.placeHolderParent == this.transform)
-        {
             draggable.placeHolderParent = draggable.originalParent;
-        }
     }
 }
