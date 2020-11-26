@@ -91,6 +91,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   originalParent: {fileID: 538150229993745268}
+  placeHolderParent: {fileID: 0}
+  placeHolder: {fileID: 0}
 --- !u!225 &538150229993745269
 CanvasGroup:
   m_ObjectHideFlags: 0

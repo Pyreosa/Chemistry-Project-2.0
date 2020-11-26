@@ -10,6 +10,7 @@ Library/# This .gitignore file should be placed at the root of your Unity projec
 /[Bb]uilds/
 /[Ll]ogs/
 /[Uu]ser[Ss]ettings/
+/Regulation/
 
 # MemoryCaptures can get excessive in size.
 # They also could contain extremely sensitive data

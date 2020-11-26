@@ -14,14 +14,14 @@ public class OnDrop : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPointe
         private GameObject sodiumHydrogenMolecule;
 
         private CanvasGroup canvasGroup;
-    
+
     void Awake()
     {
         canvasGroup = GetComponent<CanvasGroup>();
     }
 
 
-    void combine(PointerEventData eventData)
+    void Combine(PointerEventData eventData)
         {
             //CREATING HARDCODED REACTIONS
             if(eventData.pointerDrag.tag == "Sodium" && eventData.pointerEnter.tag == "Chloride"
@@ -32,7 +32,7 @@ public class OnDrop : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPointe
                     sodiumChlorideMolecule.transform.SetParent(Utils.tabletop.transform);
                 }
 
-            if(eventData.pointerDrag.tag == "Hydrogen" && eventData.pointerEnter.tag == "Chloride" 
+            if(eventData.pointerDrag.tag == "Hydrogen" && eventData.pointerEnter.tag == "Chloride"
             || eventData.pointerEnter.tag == "Hydrogen" && eventData.pointerDrag.tag == "Chloride")
                 {
                     hydroChlorideMolecule = Instantiate(hydroChloride, new Vector3(10, 10), Quaternion.identity);
@@ -40,7 +40,7 @@ public class OnDrop : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPointe
                     hydroChlorideMolecule.transform.SetParent(Utils.tabletop.transform);
                 }
 
-            if(eventData.pointerDrag.tag == "Hydrogen" && eventData.pointerEnter.tag == "Sodium" 
+            if(eventData.pointerDrag.tag == "Hydrogen" && eventData.pointerEnter.tag == "Sodium"
             || eventData.pointerEnter.tag == "Hydrogen" && eventData.pointerDrag.tag == "Sodium")
                 {
                     sodiumHydrogenMolecule = Instantiate(sodiumHydrogen, new Vector3(10, 10), Quaternion.identity);
@@ -51,10 +51,10 @@ public class OnDrop : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPointe
 
      public void OnPointerEnter(PointerEventData eventData)
     {
-        Draggable draggable = eventData.pointerDrag.GetComponent<Draggable>();
-        if (eventData.pointerDrag == null) 
+       if (eventData.pointerDrag == null) 
              return;
 
+          Draggable draggable = eventData.pointerDrag.GetComponent<Draggable>();
         if (draggable != null)
             draggable.placeHolderParent = this.transform;
     }
@@ -71,24 +71,25 @@ public class OnDrop : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPointe
             Destroy(eventData.pointerDrag);
             Destroy(eventData.pointerEnter);
             Destroy(draggable.placeHolder);
-            combine(eventData);
+            Combine(eventData);
 
             Debug.Log(eventData.pointerEnter.tag);
             Debug.Log(eventData.pointerDrag.tag);
-        
-        } else 
-                if (eventData.pointerEnter.tag == "TableTop")
-                    draggable.originalParent = this.transform;
+
+        } else
+            {    if (eventData.pointerEnter.tag == "TableTop")
+                     draggable.originalParent = this.transform;
+            }
     }
 
      public void OnPointerExit(PointerEventData eventData)
     {
-         Draggable draggable = eventData.pointerDrag.GetComponent<Draggable>();
         if (eventData.pointerDrag == null) 
-            return;   
+             return;
 
+          Draggable draggable = eventData.pointerDrag.GetComponent<Draggable>();
         if (draggable != null && draggable.placeHolderParent == this.transform)
             draggable.placeHolderParent = draggable.originalParent;
-    }  
+    }
 
 }
