@@ -17,6 +17,7 @@ public class ElementsSpawner : MonoBehaviour
     {
          spawnChlorideMolecule = Instantiate(spawnChloride, new Vector3(10, 10), Quaternion.identity);
          spawnChlorideMolecule.transform.SetParent(Utils.cardSpawner.transform);
+         spawnChlorideMolecule.SetActive(true);
     }
     
     public void spawnSodiumToHand ()

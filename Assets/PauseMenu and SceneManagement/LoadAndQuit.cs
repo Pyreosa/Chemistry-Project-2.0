@@ -22,6 +22,12 @@ public class LoadAndQuit : MonoBehaviour
     {
         Application.Quit();
     }
+
+    public void Reset()
+    {
+        Time.timeScale = 1f;
+        SceneManager.LoadScene(1);
+    }
 }
 
 

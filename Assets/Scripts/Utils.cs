@@ -9,6 +9,8 @@ public class Utils : MonoBehaviour
         public static GameObject tabletop;
         public static Canvas canvas;
         public static GameObject cardSpawner;
+        public static float screenSizeWidth;
+        public static float screenSizeHeight;
         public static int currentSceneIndex;
         public static int sceneToContinue;
 
@@ -22,5 +24,7 @@ public class Utils : MonoBehaviour
         cardSpawner = GameObject.Find("Hand");
         currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
         sceneToContinue = PlayerPrefs.GetInt("SavedScenes");
+        screenSizeWidth = Screen.width;
+        screenSizeHeight = Screen.height;
     }
 }
